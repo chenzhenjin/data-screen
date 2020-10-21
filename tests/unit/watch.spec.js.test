@@ -1,0 +1,53 @@
+/*
+ * @Author: chenzhenjin
+ * @email: BrotherStudy@163.com
+ * @Date: 2020-09-18 17:06:11
+ * @LastEditTime: 2020-10-09 18:14:19
+ * @Descripttion: 测试计算属性
+ */
+import { enableAutoDestroy, shallowMount } from '@vue/test-utils'
+import myInput from '@/components/input.vue'
+enableAutoDestroy(afterEach)
+const factoryWrapper = (component, value = { data: {}, props: {} }) => {
+  return shallowMount(component, {
+    data() {
+      return { ...value.data }
+    },
+    propsData: {
+      ...value.props
+    }
+  })
+}
+
+describe('测试监听器', () => {
+  let spy
+  beforeEach(() => {
+    //创建一个jest.fn()模拟函数同时追踪console
+    spy = jest.spyOn(console, 'log')
+  })
+  afterEach(() => {
+    //清除状态
+    spy.mockClear()
+  })
+  it('nextTick等待更新完成后调用spy', done => {
+    const wrapper = factoryWrapper(myInput, { props: { needReverse: true } })
+    wrapper.vm.inputText = 'ok'
+    wrapper.vm.$nextTick(() => {
+      expect(spy).toBeCalledTimes(2)
+      expect(spy).toBeCalledWith('input')
+      done()
+    })
+  })
+  it('两次nextTick等待更新完成后调用spy,此时由于做了判断前后值一样，会不执行', done => {
+    const wrapper = factoryWrapper(myInput, { props: { needReverse: true } })
+    wrapper.vm.inputText = 'ok'
+    wrapper.vm.$nextTick(() => {
+      spy.mockClear()
+      wrapper.vm.inputText = 'ok'
+      wrapper.vm.$nextTick(() => {
+        expect(spy).not.toBeCalled()
+        done()
+      })
+    })
+  })
+})

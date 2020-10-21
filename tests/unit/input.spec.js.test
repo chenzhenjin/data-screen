@@ -1,0 +1,33 @@
+/*
+ * @Author: chenzhenjin
+ * @email: BrotherStudy@163.com
+ * @Date: 2020-09-18 17:06:11
+ * @LastEditTime: 2020-09-18 18:14:07
+ * @Descripttion: 测试计算属性
+ */
+import { enableAutoDestroy, shallowMount } from '@vue/test-utils'
+import myInput from '@/components/input.vue'
+enableAutoDestroy(afterEach)
+const factoryWrapper = (component, value = { data: {}, props: {} }) => {
+  return shallowMount(component, {
+    data() {
+      return { ...value.data }
+    },
+    propsData: {
+      ...value.props
+    }
+  })
+}
+
+describe('测试计算属性', () => {
+  it('输入信息', () => {
+    const wrapper = factoryWrapper(myInput, { props: { needReverse: false } })
+    wrapper.vm.inputText = 'ok'
+    expect(wrapper.vm.outText).toBe('ok')
+  })
+  it('输入信息 反转', () => {
+    const wrapper = factoryWrapper(myInput, { props: { needReverse: true } })
+    wrapper.vm.inputText = 'ok'
+    expect(wrapper.vm.outText).toBe('ko')
+  })
+})

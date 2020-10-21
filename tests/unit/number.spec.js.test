@@ -1,0 +1,40 @@
+/*
+ * @Author: chenzhenjin
+ * @email: BrotherStudy@163.com
+ * @Date: 2020-09-17 17:41:02
+ * @LastEditTime: 2020-09-18 15:42:06
+ * @Descripttion: 模块描述
+ */
+import { mount, shallowMount, config } from '@vue/test-utils'
+import number from '@/components/number.vue'
+//mount会有副作用，会目标组件的子组件也渲染了
+//改为//shallowMount
+
+describe('number.vue', () => {
+  let wrapper, vm
+  // 在测试之前先获取包裹器和实例
+  beforeEach(() => {
+    wrapper = shallowMount(number)
+    vm = wrapper.vm
+    wrapper.setProps({ message: 'hello' })
+    wrapper.setData({ nums: [9, 8, 7, 6] })
+  })
+  //css选择器、vue组件选择器和vue实例属性选择器
+  it('it is number component', () => {
+    expect(wrapper.findComponent(number).exists()).toBe(true)
+    expect(wrapper.findComponent({ name: 'number' }).exists()).toBe(true)
+    expect(wrapper.find('.one').exists()).toBe(true)
+    expect(wrapper.findComponent(number).attributes().class).toContain('two')
+    expect(wrapper.find('p').exists()).toBe(true)
+  })
+  //vue实例的属性判断
+  it('render message hello nums to [9,8,7]', () => {
+    expect(vm.message).toEqual('hello')
+    expect(vm.nums).toEqual([9, 8, 7, 6])
+  })
+  //快照  行内样式判断
+  it('has the expected html structure', () => {
+    expect(wrapper.find('.two').element.style.color).toContain('blue')
+    expect(vm.$el).toMatchSnapshot()
+  })
+})

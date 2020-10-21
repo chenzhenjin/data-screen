@@ -1,0 +1,47 @@
+/*
+ * @Author: chenzhenjin
+ * @email: BrotherStudy@163.com
+ * @Date: 2020-09-18 14:31:08
+ * @LastEditTime: 2020-09-18 17:44:13
+ * @Descripttion: 父子组件传值
+ */
+import { enableAutoDestroy, shallowMount } from '@vue/test-utils'
+import single from '@/components/single.vue'
+
+// 将会在每个测试之后运行 `wrapper.destroy()`
+enableAutoDestroy(afterEach)
+//工厂函数在于不用new生成一个新的wrapper
+const factoryWrapper = (component, value = { data: {}, props: {} }) => {
+  console.log('props', value.props)
+  return shallowMount(component, {
+    data() {
+      return { ...value.data }
+    },
+    propsData: {
+      ...value.props
+    }
+  })
+}
+
+describe('父子组件传值', () => {
+  it('测试wrapper props', () => {
+    const wrapper = factoryWrapper(single, {
+      props: {
+        nums: [1, 2, 3]
+      }
+    })
+    expect(wrapper.props().nums).toEqual([1, 2, 3])
+  })
+  it('测试vm props', () => {
+    const wrapper = factoryWrapper(single, {
+      props: {
+        nums: [4, 5, 6]
+      }
+    })
+    const nums = wrapper.vm.$options.props.nums
+    expect(nums.type).toBe(Array)
+    expect(nums.required).toBeTruthy()
+    expect(nums.validator && nums.validator([1])).toBeFalsy()
+    expect(nums.validator && nums.validator([1, 2])).toBeTruthy()
+  })
+})
