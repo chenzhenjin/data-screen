@@ -2,14 +2,16 @@
  * @Author: chenzhenjin
  * @email: BrotherStudy@163.com
  * @Date: 2020-09-17 17:27:52
- * @LastEditTime: 2020-10-09 18:32:09
+ * @LastEditTime: 2020-10-22 13:46:42
  * @Descripttion: 模块描述
 -->
 <template>
   <div>
-    <ul class="single-ul">
-      <li v-for="num of nums" :key="num" @click="currentLi(num)">{{num}}</li>
-    </ul>
+    <div class="single-ul">
+      <div v-for="num of nums" :key="num" @click="currentLi(num)">
+        {{ num }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,7 +37,7 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    currentLi(num){
+    currentLi(num) {
       console.log('currentLi')
       this.$emit('currentLi', num)
     }
@@ -48,10 +50,9 @@ export default {
   list-style: none;
   width: 200px;
   margin: 0 auto;
-  li{
+  li {
     cursor: pointer;
     line-height: 200%;
   }
 }
 </style>
-

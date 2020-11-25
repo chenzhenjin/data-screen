@@ -1,7 +1,11 @@
 <template>
   <div class="about">
     <keep-alive>
-      <line-chart :receiveData="lineChartData" :width="lineChartWidth" :lineSettings="lineSettings"></line-chart>
+      <line-chart
+        :receiveData="lineChartData"
+        :width="lineChartWidth"
+        :lineSettings="lineSettings"
+      ></line-chart>
     </keep-alive>
     <!-- <scatter-chart :receiveData="scatterChart" :scatterSettings="scatterSettings"></scatter-chart> -->
     <!-- <ve-line :extend="extend"></ve-line> -->
@@ -482,5 +486,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

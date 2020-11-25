@@ -1,7 +1,14 @@
+<!--
+ * @Author: chenzhenjin
+ * @email: BrotherStudy@163.com
+ * @Date: 2020-09-18 17:08:00
+ * @LastEditTime: 2020-10-22 16:44:36
+ * @Descripttion: 模块描述
+-->
 <template>
-  <div class>
+  <div class="input-text">
     <input type="text" v-model="inputText" />
-    <div>{{outText}}</div>
+    <div class="out-text">{{ outText }}</div>
   </div>
 </template>
 
@@ -28,8 +35,8 @@ export default {
     }
   },
   watch: {
-    inputText: function(newVal, oldVal){
-      if(newVal.trim().length > 0 && newVal !== oldVal){
+    inputText: function(newVal, oldVal) {
+      if (newVal.trim().length > 0 && newVal !== oldVal) {
         this.printVal(newVal)
       }
     }
@@ -39,12 +46,11 @@ export default {
   },
   mounted() {},
   methods: {
-    printVal(val){
+    printVal(val) {
       console.log(val)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

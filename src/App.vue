@@ -17,7 +17,7 @@ import myInput from '@/components/input'
 export default {
   components: { number, myInput }
 }
-</script>  
+</script>
 
 <style lang="scss" type="text/scss">
 #app {

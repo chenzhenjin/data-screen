@@ -26,7 +26,7 @@ describe('自定义事件', () => {
       props: { nums: [1, 2, 3, 4, 5, 6] }
     })
     const mockFn = jest.fn()
-    wrapper.vm.$on('currentLi', mockFn )
+    wrapper.vm.$on('currentLi', mockFn)
     wrapper
       .findAll('li')
       .at(0)

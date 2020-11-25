@@ -2,18 +2,18 @@
  * @Author: chenzhenjin
  * @email: BrotherStudy@163.com
  * @Date: 2020-06-12 13:42:43
- * @LastEditTime: 2020-09-17 17:51:26
+ * @LastEditTime: 2020-10-22 12:05:23
  * @Descripttion: 模块描述
  */
 const path = require('path')
-const webpack = require('webpack')
+// const webpack = require('webpack')
 const resolve = dir => {
   return path.join(__dirname, dir)
 }
 module.exports = {
   devServer: {
     disableHostCheck: true,
-    host: "192.168.50.49"
+    host: '192.168.50.49'
   },
   publicPath: './',
   productionSourceMap: true, // 生产环境是否生成 sourceMap 文件

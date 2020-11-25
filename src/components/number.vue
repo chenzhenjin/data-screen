@@ -2,15 +2,17 @@
  * @Author: chenzhenjin
  * @email: BrotherStudy@163.com
  * @Date: 2020-09-17 17:26:25
- * @LastEditTime: 2020-10-09 18:40:36
+ * @LastEditTime: 2020-10-22 16:05:05
  * @Descripttion: 模块描述
 -->
 <template>
   <div class="number one">
-    <div class="two" style="color:blue;">{{text}}</div>
-    <div>{{message}}</div>
-    <single :nums="nums"  @currentLi="selectLi"></single>
-    <div v-if="li">选择了第{{li}}个</div>
+    <div class="two" style="color:blue;">{{ text }}</div>
+    <div>{{ message }}</div>
+    <div class="single-area">
+      <single :nums="nums" @currentLi="selectLi"></single>
+      <div class="select-li" v-if="li">选择了第{{ li }}个</div>
+    </div>
   </div>
 </template>
 
@@ -20,7 +22,7 @@ export default {
   name: 'number',
   components: { single },
   props: {
-    message: String,
+    message: String
   },
   data() {
     return {
@@ -36,7 +38,7 @@ export default {
   },
   mounted() {},
   methods: {
-    selectLi(value){
+    selectLi(value) {
       console.log('selectLi', value)
       this.li = value
     }
@@ -45,8 +47,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .number{
-    font-size: 16px;
-    color: red;
-  }
+.number {
+  font-size: 16px;
+  color: red;
+}
 </style>
